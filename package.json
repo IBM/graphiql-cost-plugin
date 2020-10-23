@@ -1,0 +1,29 @@
+{
+  "name": "graphiql-cost-plugin",
+  "version": "1.0.0",
+  "description": "Plugin for the GraphiQL IDE that displays GraphQL query cost information",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "microbundle src/index.ts --jsx React.createElement",
+    "dev": "microbundle watch src/index.ts --jsx React.createElement"
+  },
+  "engines": {
+    "node": "12.x.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.ibm.com:kthakre/graphiql-cost-plugin.git"
+  },
+  "contributors": [
+    "Erik Wittern, Ketki Thakre"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^16.9.52",
+    "microbundle": "^0.12.4",
+    "typescript": "^4.0.3"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0"
+  }
+}

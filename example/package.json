@@ -1,0 +1,24 @@
+{
+  "name": "graphiql-cost-plugin-example",
+  "version": "1.0.0",
+  "description": "Example application for testing the use of the GraphiQL Cost Plugin",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "Erik Wittern",
+  "license": "MIT",
+  "dependencies": {
+    "graphiql": "^1.0.5",
+    "graphiql-cost-plugin": "file:../",
+    "graphql": "^15.3.0",
+    "isomorphic-fetch": "^3.0.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

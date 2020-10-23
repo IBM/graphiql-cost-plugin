@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "ESNext",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "node"
+  },
+  "include": [
+    "src/index.ts",
+    "src/**/*.tsx",
+    "src/**/*.ts"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "dataAvailability": "AVAILABLE",
+  "costData": {
+    "query": {
+      "query": "{accounts(limit:1) {name {first}}}",
+      "operationType": "query"
+    },
+    "request": {
+      "fieldCost": 2147483647,
+      "typeCost": 5,
+      "typeCounts": {
+        "Account": 1,
+        "Name": 1,
+        "Query": 1
+      },
+      "fieldCounts": {
+        "Account.name": 2147483647,
+        "Query.accounts": 1
+      },
+      "inputFieldCost": 0,
+      "inputTypeCost": 0,
+      "argumentCost": 0
+    },
+    "rateLimits": {
+      "assemblyRateLimits": {
+        "graphql-design-request": [
+          {
+            "rate": 3,
+            "interval": 1,
+            "unit": "second",
+            "hardLimit": true
+          }
+        ],
+        "graphql-field-cost": [
+          {
+            "rate": 100,
+            "interval": 1,
+            "unit": "second",
+            "hardLimit": true
+          },
+          {
+            "rate": 1000,
+            "interval": 30,
+            "unit": "minute",
+            "hardLimit": true
+          },
+          {
+            "rate": 0,
+            "interval": 1,
+            "unit": "hour",
+            "hardLimit": true
+          }
+        ],
+        "graphql-input-type-cost": [
+          {
+            "rate": 10,
+            "interval": 1,
+            "unit": "second",
+            "hardLimit": true
+          },
+          {
+            "rate": 500,
+            "interval": 30,
+            "unit": "minute",
+            "hardLimit": true
+          }
+        ],
+        "graphql-type-cost": [
+          {
+            "rate": 20,
+            "interval": 1,
+            "unit": "second",
+            "hardLimit": true
+          }
+        ]
+      },
+      "assemblyCountLimits": {
+        "graphql-subscription-field-cost": [
+          {
+            "count": 0,
+            "hardLimit": true
+          }
+        ],
+        "graphql-subscription-type-cost": [
+          {
+            "count": 0,
+            "hardLimit": true
+          }
+        ]
+      },
+      "rateLimits": {
+        "rate-limit": [
+          {
+            "rate": 0,
+            "interval": 1,
+            "unit": "second",
+            "hardLimit": false
+          }
+        ]
+      },
+      "name": "test_sandbox_graphql-api-auto-product_1.0.0_default"
+    }
+  }
+}
