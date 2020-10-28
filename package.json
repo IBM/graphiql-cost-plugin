@@ -1,6 +1,6 @@
 {
   "name": "graphiql-cost-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Plugin for the GraphiQL IDE that displays GraphQL query cost information",
   "main": "dist/index.js",
   "scripts": {
