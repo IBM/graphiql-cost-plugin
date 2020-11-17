@@ -40,7 +40,7 @@ Before being able to build this project, install the dependencies:
 npm i
 ```
 
-...and install the `react` peer dependency:
+...and install the `react` peer dependency. This is not needed if running the example in this repo:
 
 ```
 npm i react --no-save
