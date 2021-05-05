@@ -13,12 +13,12 @@ type Props = {
 }
 
 export default function CostOnly({characteristics}: Props) {
-  const typeCountDetails = Object.keys(characteristics.typeCounts).map((key) => {
+  const typeCountDetails = characteristics.typeCounts && Object.keys(characteristics.typeCounts).map((key) => {
     return <span>{key}: <NumberOrInf num={characteristics.typeCounts[key]}/></span>
-  })
-  const fieldCountDetails = Object.keys(characteristics.fieldCounts).map((key) => {
+  }) || null
+  const fieldCountDetails = characteristics.fieldCounts && Object.keys(characteristics.fieldCounts).map((key) => {
     return <span>{key}: <NumberOrInf num={characteristics.fieldCounts[key]}/></span>
-  })
+  }) || null
   return (
     <div style={{padding: '0.5em 0 0.5em 0.5em'}}>
       <h3
