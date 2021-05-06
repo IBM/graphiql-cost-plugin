@@ -32,12 +32,12 @@ export function TimeFrameDetails({timeFrame, limits, characteristics}: Props) {
     (val) => val.name === 'fieldCost'
   )
 
-  const typeCountDetails = Object.keys(characteristics.typeCounts).map((key) => {
+  const typeCountDetails = characteristics.typeCounts && Object.keys(characteristics.typeCounts).map((key) => {
     return <span>{key}: <NumberOrInf num={characteristics.typeCounts[key]}/></span>
-  })
-  const fieldCountDetails = Object.keys(characteristics.fieldCounts).map((key) => {
+  }) || null
+  const fieldCountDetails = characteristics.fieldCounts && Object.keys(characteristics.fieldCounts).map((key) => {
     return <span>{key}: <NumberOrInf num={characteristics.fieldCounts[key]}/></span>
-  })
+  }) || null
   return (
     <div>
       <h4 style={{marginBlockStart: '0.3em', marginBlockEnd: 0}}>
