@@ -15,6 +15,7 @@ type Props = {
 
 export function CostPlugin({dataAvailability, costData}: Props) {
   let main
+
   switch (dataAvailability) {
     case DataAvailability.None:
       main = (
@@ -27,9 +28,26 @@ export function CostPlugin({dataAvailability, costData}: Props) {
       main = <h3 style={{color: '#cdcdcd', textAlign: 'center'}}>Loading...</h3>
       break
     case DataAvailability.Error:
+      let errMsg: any = 'Error loading cost data'
+      if(typeof costData === 'object' && costData && costData.errors) {
+        const errs = Array.isArray(costData.errors) ? costData.errors : [costData.errors]
+        errMsg = (
+            <ul>
+              {
+                errs.map((e: any) => {
+                  return (
+                    <li>
+                      {e && e.message || ''}
+                    </li>
+                  )
+                })
+              }
+            </ul>
+        )
+      }
       main = (
         <h3 style={{color: '#cdcdcd', textAlign: 'center'}}>
-          Error loading cost data
+          {errMsg}
         </h3>
       )
       break

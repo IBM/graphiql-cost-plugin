@@ -62,6 +62,7 @@ export type CostEndpointResponse = {
   request: Characteristics
   rateLimits?: RateLimits
   name: string
+  errors?: any
 }
 
 /**
