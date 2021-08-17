@@ -56,6 +56,7 @@ export declare type CostEndpointResponse = {
     request: Characteristics;
     rateLimits?: RateLimits;
     name: string;
+    errors?: any;
 };
 /**
  * The state that cost data is in.
