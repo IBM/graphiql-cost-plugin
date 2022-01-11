@@ -59,7 +59,7 @@ export default function DetailsPopover(props: Props) {
         backgroundColor: '#111',
         color: 'white',
         bottom: 15,
-        width: 170,
+        width: 'max-content',
         padding: 5,
         right: -50
       }}>
