@@ -69,3 +69,6 @@ typings/
 # Exclude example artifacts:
 example/package-lock.json
 example/dist
+
+# Temporary files
+*.swp
