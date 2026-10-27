@@ -4,8 +4,9 @@
   "description": "Plugin for the GraphiQL IDE that displays GraphQL query cost information",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --external react",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --external react --watch"
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "validate": "node -e \"require('./dist/index.js')\" && node --input-type=module -e \"import('./dist/index.mjs')\""
   },
   "engines": {
     "node": "^18.0.0"
