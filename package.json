@@ -9,7 +9,7 @@
     "validate": "node -e \"require('./dist/index.js')\" && node --input-type=module -e \"import('./dist/index.mjs')\""
   },
   "engines": {
-    "node": "^18.0.0"
+    "node": ">=18.0.0"
   },
   "repository": {
     "type": "git",
