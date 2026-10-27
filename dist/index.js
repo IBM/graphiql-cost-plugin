@@ -1,2 +1,278 @@
-var e,t=require("react"),n=(e=t)&&"object"==typeof e&&"default"in e?e.default:e;function r(e){return e.num>=2147483647?n.createElement("span",null,"∞ "):n.createElement("span",null,e.num%1!=0?e.num.toFixed(2):e.num.toString()," ")}function a(e){var t=n.useState(!1),r=t[0],a=t[1];if(!Array.isArray(e.details)||0===e.details.length)return null;var l=n.createElement("div",null,n.createElement("h3",{style:{marginBlockStart:0,marginBlockEnd:0}},e.title),n.createElement("ul",{style:{marginBlockStart:5,marginBlockEnd:5}},e.details.map(function(e,t){return n.createElement("li",{key:t},e)})));return n.createElement("span",{style:{marginLeft:"0.2rem",color:"gray",borderBottom:"1px dotted gray",cursor:"pointer",position:"relative"},onMouseEnter:function(){return a(!0)},onMouseLeave:function(){return a(!1)}},"ℹ",n.createElement("div",{style:{display:r?"block":"none",zIndex:1e3,position:"absolute",borderRadius:"5px",backgroundColor:"#111",color:"white",bottom:15,width:"max-content",padding:5,right:-50}},l))}function l(e){var t=e.characteristics,l=t.typeCounts&&Object.keys(t.typeCounts).map(function(e){return n.createElement("span",null,e,": ",n.createElement(r,{num:t.typeCounts[e]}))})||null,i=t.fieldCounts&&Object.keys(t.fieldCounts).map(function(e){return n.createElement("span",null,e,": ",n.createElement(r,{num:t.fieldCounts[e]}))})||null;return n.createElement("div",{style:{padding:"0.5em 0 0.5em 0.5em"}},n.createElement("h3",{style:{marginBlockStart:"0.2em",marginBlockEnd:0}},"Query cost"),n.createElement("div",{style:{paddingLeft:"0.5em"}},"Type cost: ",n.createElement(r,{num:t.typeCost}),n.createElement(a,{title:"Type counts",details:l})," "),n.createElement("div",{style:{paddingLeft:"0.5em"}},"Field cost: ",n.createElement(r,{num:t.fieldCost}),n.createElement(a,{title:"Field counts",details:i})," "))}function i(e,t){return 0===e||0===t?Number.MAX_SAFE_INTEGER:Math.floor(e/t)}function m(e){var t=e.timeFrame,l=e.limits,m=e.characteristics,c=l.find(function(e){return"typeCost"===e.name}),o=l.find(function(e){return"fieldCost"===e.name}),s=m.typeCounts&&Object.keys(m.typeCounts).map(function(e){return n.createElement("span",null,e,": ",n.createElement(r,{num:m.typeCounts[e]}))})||null,u=m.fieldCounts&&Object.keys(m.fieldCounts).map(function(e){return n.createElement("span",null,e,": ",n.createElement(r,{num:m.fieldCounts[e]}))})||null;return n.createElement("div",null,n.createElement("h4",{style:{marginBlockStart:"0.3em",marginBlockEnd:0}},"Limits for ",t.interval," ",t.unit,":"),n.createElement("div",null,c?n.createElement("span",{style:{paddingLeft:"0.5em"}},n.createElement(r,{num:i(c.rate,m.typeCost)}),"times for type cost of ",n.createElement(r,{num:m.typeCost}),n.createElement(a,{title:"Type counts",details:s})):n.createElement("span",{style:{color:"gray",paddingLeft:"0.5em"}},"No limit defined for type cost")),n.createElement("div",null,o?n.createElement("span",{style:{paddingLeft:"0.5em"}},n.createElement(r,{num:i(o.rate,m.fieldCost)}),"times for field cost of ",n.createElement(r,{num:m.fieldCost}),n.createElement(a,{title:"Field counts",details:u})):n.createElement("span",{style:{color:"gray",paddingLeft:"0.5em"}},"No limit defined for field cost")))}function c(){return n.createElement("div",{style:{width:0,height:0,borderTop:"8px solid transparent",borderBottom:"8px solid transparent",borderRight:"8px solid #444",float:"right"}})}function o(e,t,n){Array.isArray(e)&&0!==e.length&&e.forEach(function(e){var r=t.find(function(t){return t.timeFrame.interval===e.interval&&t.timeFrame.unit===e.unit});r?r.limits.push({name:n,rate:e.rate}):t.push({timeFrame:{interval:e.interval,unit:e.unit},limits:[{name:n,rate:e.rate}]})})}function s(e){var a,l,i,s=e.characteristics,u=e.rateLimits,d=t.useState(null),E=d[0],p=d[1],f=null==(a=u.assemblyRateLimits)?void 0:a["graphql-field-cost"],y=null==(l=u.assemblyRateLimits)?void 0:l["graphql-type-cost"],g=null==(i=u.assemblyRateLimits)?void 0:i["graphql-type-cost"],v=[];o(f,v,"fieldCost"),o(y,v,"typeCost"),o(g,v,"inputTypeCost");var h=E?n.createElement(m,{timeFrame:E.timeFrame,characteristics:s,limits:E.limits}):null,b=n.createElement("div",null,n.createElement("h3",{style:{marginBlockStart:"0.2em",marginBlockEnd:0}},"Query limits:"),v.map(function(e,t){var a=function(e,t){var n=Number.MAX_SAFE_INTEGER;return e.forEach(function(e){var r=e.rate,a=t[e.name],l="number"==typeof a&&0!==a&&0!==r?Math.floor(r/a):Number.MAX_SAFE_INTEGER;l<n&&(n=l)}),n}(e.limits,s),l=!!E&&e.timeFrame.interval===E.timeFrame.interval&&e.timeFrame.unit===E.timeFrame.unit,i=n.createElement("span",{onClick:function(){return t=e,void p(E&&E.timeFrame.interval===t.timeFrame.interval&&E.timeFrame.unit===t.timeFrame.unit?null:t);var t},style:{fontStyle:"italic",textDecorationStyle:"dotted",cursor:"pointer",paddingLeft:10}},l?"hide...":"more...");return n.createElement("div",{key:t,style:{paddingLeft:"0.5em"}},n.createElement(r,{num:a}),"times per ",e.timeFrame.interval," ",e.timeFrame.unit,i,l?n.createElement(c,null):null)})),C=h?n.createElement(n.Fragment,null,n.createElement("div",{style:{width:250,padding:"0.5em 0 0.5em 0.5em"}},b),n.createElement("div",{style:{flex:1,backgroundColor:"#444",color:"white",padding:"0.5em 0 0.5em 0.5em"}},h)):n.createElement(n.Fragment,null,n.createElement("div",{style:{flex:1,padding:"0.5em 0 0.5em 0.5em"}},b));return n.createElement("div",{style:{display:"flex",flexDirection:"row",width:"100%",height:"100%"}},C)}exports.CostPlugin=function(e){var t,r=e.costData;switch(e.dataAvailability){case"NONE":t=n.createElement("h3",{style:{color:"#cdcdcd",textAlign:"center"}},"No data yet");break;case"LOADING":t=n.createElement("h3",{style:{color:"#cdcdcd",textAlign:"center"}},"Loading...");break;case"ERROR":var a="Error loading cost data";if("object"==typeof r&&r&&r.errors){var i=Array.isArray(r.errors)?r.errors:[r.errors];a=n.createElement("ul",null,i.map(function(e){return n.createElement("li",null,e&&e.message||"")}))}t=n.createElement("h3",{style:{color:"#cdcdcd",textAlign:"center"}},a);break;case"AVAILABLE":t="object"==typeof r&&"object"==typeof r.request&&"object"==typeof r.rateLimits?n.createElement(s,{characteristics:r.request,rateLimits:r.rateLimits}):"object"==typeof r.request?n.createElement(l,{characteristics:r.request}):n.createElement("h3",{style:{color:"#cdcdcd",textAlign:"center"}},"Error rendering cost data")}return n.createElement("div",{className:"qcs_wrapper"},t)};
-//# sourceMappingURL=index.js.map
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/index.ts
+var index_exports = {};
+__export(index_exports, {
+  CostPlugin: () => CostPlugin
+});
+module.exports = __toCommonJS(index_exports);
+
+// src/components/App.tsx
+var import_react7 = __toESM(require("react"));
+
+// src/components/CostOnly.tsx
+var import_react3 = __toESM(require("react"));
+
+// src/components/NumberOrInf.tsx
+var import_react = __toESM(require("react"));
+function NumberOrInf(props) {
+  if (props.num >= 2147483647) {
+    return /* @__PURE__ */ import_react.default.createElement("span", null, "\u221E ");
+  }
+  if (props.num % 1 != 0) {
+    return /* @__PURE__ */ import_react.default.createElement("span", null, props.num.toFixed(2), " ");
+  }
+  return /* @__PURE__ */ import_react.default.createElement("span", null, props.num.toString(), " ");
+}
+
+// src/components/DetailsPopover.tsx
+var import_react2 = __toESM(require("react"));
+function DetailsPopover(props) {
+  const [hover, setHover] = import_react2.default.useState(false);
+  if (!Array.isArray(props.details) || props.details.length === 0) {
+    return null;
+  }
+  const details = /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement(
+    "h3",
+    {
+      style: {
+        marginBlockStart: 0,
+        marginBlockEnd: 0
+      }
+    },
+    props.title
+  ), /* @__PURE__ */ import_react2.default.createElement("ul", { style: {
+    marginBlockStart: 5,
+    marginBlockEnd: 5
+  } }, props.details.map((ex, i) => {
+    return /* @__PURE__ */ import_react2.default.createElement("li", { key: i }, ex);
+  })));
+  return /* @__PURE__ */ import_react2.default.createElement(
+    "span",
+    {
+      style: {
+        marginLeft: "0.2rem",
+        color: "gray",
+        borderBottom: "1px dotted gray",
+        cursor: "pointer",
+        position: "relative"
+      },
+      onMouseEnter: () => setHover(true),
+      onMouseLeave: () => setHover(false)
+    },
+    "\u2139",
+    /* @__PURE__ */ import_react2.default.createElement("div", { style: {
+      display: hover ? "block" : "none",
+      zIndex: 1e3,
+      position: "absolute",
+      borderRadius: "5px",
+      backgroundColor: "#111",
+      color: "white",
+      bottom: 15,
+      width: "max-content",
+      padding: 5,
+      right: -50
+    } }, details)
+  );
+}
+
+// src/components/CostOnly.tsx
+function CostOnly({ characteristics }) {
+  const typeCountDetails = characteristics.typeCounts && Object.keys(characteristics.typeCounts).map((key) => {
+    return /* @__PURE__ */ import_react3.default.createElement("span", null, key, ": ", /* @__PURE__ */ import_react3.default.createElement(NumberOrInf, { num: characteristics.typeCounts[key] }));
+  }) || null;
+  const fieldCountDetails = characteristics.fieldCounts && Object.keys(characteristics.fieldCounts).map((key) => {
+    return /* @__PURE__ */ import_react3.default.createElement("span", null, key, ": ", /* @__PURE__ */ import_react3.default.createElement(NumberOrInf, { num: characteristics.fieldCounts[key] }));
+  }) || null;
+  return /* @__PURE__ */ import_react3.default.createElement("div", { style: { padding: "0.5em 0 0.5em 0.5em" } }, /* @__PURE__ */ import_react3.default.createElement(
+    "h3",
+    {
+      style: {
+        marginBlockStart: "0.2em",
+        marginBlockEnd: 0
+      }
+    },
+    "Query cost"
+  ), /* @__PURE__ */ import_react3.default.createElement("div", { style: { paddingLeft: "0.5em" } }, "Type cost: ", /* @__PURE__ */ import_react3.default.createElement(NumberOrInf, { num: characteristics.typeCost }), /* @__PURE__ */ import_react3.default.createElement(DetailsPopover, { title: "Type counts", details: typeCountDetails }), " "), /* @__PURE__ */ import_react3.default.createElement("div", { style: { paddingLeft: "0.5em" } }, "Field cost: ", /* @__PURE__ */ import_react3.default.createElement(NumberOrInf, { num: characteristics.fieldCost }), /* @__PURE__ */ import_react3.default.createElement(DetailsPopover, { title: "Field counts", details: fieldCountDetails }), " "));
+}
+
+// src/components/CostAndRates.tsx
+var import_react6 = __toESM(require("react"));
+
+// src/components/TimeFrameDetails.tsx
+var import_react4 = __toESM(require("react"));
+function getAllowedTimes(rate, cost) {
+  if (rate === 0 || cost === 0) {
+    return Number.MAX_SAFE_INTEGER;
+  }
+  return Math.floor(rate / cost);
+}
+function TimeFrameDetails({ timeFrame, limits, characteristics }) {
+  const typeLimit = limits.find(
+    (val) => val.name === "typeCost"
+  );
+  const fieldLimit = limits.find(
+    (val) => val.name === "fieldCost"
+  );
+  const typeCountDetails = characteristics.typeCounts && Object.keys(characteristics.typeCounts).map((key) => {
+    return /* @__PURE__ */ import_react4.default.createElement("span", null, key, ": ", /* @__PURE__ */ import_react4.default.createElement(NumberOrInf, { num: characteristics.typeCounts[key] }));
+  }) || null;
+  const fieldCountDetails = characteristics.fieldCounts && Object.keys(characteristics.fieldCounts).map((key) => {
+    return /* @__PURE__ */ import_react4.default.createElement("span", null, key, ": ", /* @__PURE__ */ import_react4.default.createElement(NumberOrInf, { num: characteristics.fieldCounts[key] }));
+  }) || null;
+  return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement("h4", { style: { marginBlockStart: "0.3em", marginBlockEnd: 0 } }, "Limits for ", timeFrame.interval, " ", timeFrame.unit, ":"), /* @__PURE__ */ import_react4.default.createElement("div", null, typeLimit ? /* @__PURE__ */ import_react4.default.createElement("span", { style: { paddingLeft: "0.5em" } }, /* @__PURE__ */ import_react4.default.createElement(NumberOrInf, { num: getAllowedTimes(typeLimit.rate, characteristics.typeCost) }), "times for type cost of ", /* @__PURE__ */ import_react4.default.createElement(NumberOrInf, { num: characteristics.typeCost }), /* @__PURE__ */ import_react4.default.createElement(DetailsPopover, { title: "Type counts", details: typeCountDetails })) : /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: "gray", paddingLeft: "0.5em" } }, "No limit defined for type cost")), /* @__PURE__ */ import_react4.default.createElement("div", null, fieldLimit ? /* @__PURE__ */ import_react4.default.createElement("span", { style: { paddingLeft: "0.5em" } }, /* @__PURE__ */ import_react4.default.createElement(NumberOrInf, { num: getAllowedTimes(fieldLimit.rate, characteristics.fieldCost) }), "times for field cost of ", /* @__PURE__ */ import_react4.default.createElement(NumberOrInf, { num: characteristics.fieldCost }), /* @__PURE__ */ import_react4.default.createElement(DetailsPopover, { title: "Field counts", details: fieldCountDetails })) : /* @__PURE__ */ import_react4.default.createElement("span", { style: { color: "gray", paddingLeft: "0.5em" } }, "No limit defined for field cost")));
+}
+
+// src/components/Triangle.tsx
+var import_react5 = __toESM(require("react"));
+function Triangle() {
+  return /* @__PURE__ */ import_react5.default.createElement("div", { style: {
+    width: 0,
+    height: 0,
+    borderTop: "8px solid transparent",
+    borderBottom: "8px solid transparent",
+    borderRight: "8px solid #444",
+    float: "right"
+  } });
+}
+
+// src/components/CostAndRates.tsx
+function groupByTimeFrames(limits, timeFrames, limitName) {
+  if (!Array.isArray(limits) || limits.length === 0) return;
+  limits.forEach((limit) => {
+    const frame = timeFrames.find((e) => e.timeFrame.interval === limit.interval && e.timeFrame.unit === limit.unit);
+    if (frame) {
+      frame.limits.push({ name: limitName, rate: limit.rate });
+    } else {
+      timeFrames.push({
+        timeFrame: { interval: limit.interval, unit: limit.unit },
+        limits: [{ name: limitName, rate: limit.rate }]
+      });
+    }
+  });
+}
+function getMaxAllowed(limits, characteristics) {
+  let maxAllowed = Number.MAX_SAFE_INTEGER;
+  limits.forEach(({ name, rate }) => {
+    const cost = characteristics[name];
+    const allowed = typeof cost === "number" && cost !== 0 && rate !== 0 ? Math.floor(rate / cost) : Number.MAX_SAFE_INTEGER;
+    if (allowed < maxAllowed) maxAllowed = allowed;
+  });
+  return maxAllowed;
+}
+function CostAndRates({ characteristics, rateLimits }) {
+  const [inFocus, setInFocus] = (0, import_react6.useState)(null);
+  const fieldCostLimits = rateLimits.assemblyRateLimits?.["graphql-field-cost"];
+  const typeCostLimits = rateLimits.assemblyRateLimits?.["graphql-type-cost"];
+  const inputTypeCostLimits = rateLimits.assemblyRateLimits?.["graphql-type-cost"];
+  const timeFrames = [];
+  groupByTimeFrames(fieldCostLimits, timeFrames, "fieldCost");
+  groupByTimeFrames(typeCostLimits, timeFrames, "typeCost");
+  groupByTimeFrames(inputTypeCostLimits, timeFrames, "inputTypeCost");
+  function handleClick(newInFocus) {
+    if (inFocus && inFocus.timeFrame.interval === newInFocus.timeFrame.interval && inFocus.timeFrame.unit === newInFocus.timeFrame.unit) {
+      setInFocus(null);
+    } else {
+      setInFocus(newInFocus);
+    }
+  }
+  let details = inFocus ? /* @__PURE__ */ import_react6.default.createElement(
+    TimeFrameDetails,
+    {
+      timeFrame: inFocus.timeFrame,
+      characteristics,
+      limits: inFocus.limits
+    }
+  ) : null;
+  const main = /* @__PURE__ */ import_react6.default.createElement("div", null, /* @__PURE__ */ import_react6.default.createElement("h3", { style: {
+    marginBlockStart: "0.2em",
+    marginBlockEnd: 0
+  } }, "Query limits:"), timeFrames.map((entry, key) => {
+    const maxAllowed = getMaxAllowed(entry.limits, characteristics);
+    const linkActive = inFocus ? entry.timeFrame.interval === inFocus.timeFrame.interval && entry.timeFrame.unit === inFocus.timeFrame.unit : false;
+    const link = /* @__PURE__ */ import_react6.default.createElement(
+      "span",
+      {
+        onClick: () => handleClick(entry),
+        style: {
+          fontStyle: "italic",
+          textDecorationStyle: "dotted",
+          cursor: "pointer",
+          paddingLeft: 10
+        }
+      },
+      linkActive ? "hide..." : "more..."
+    );
+    return /* @__PURE__ */ import_react6.default.createElement("div", { key, style: { paddingLeft: "0.5em" } }, /* @__PURE__ */ import_react6.default.createElement(NumberOrInf, { num: maxAllowed }), "times per ", entry.timeFrame.interval, " ", entry.timeFrame.unit, link, linkActive ? /* @__PURE__ */ import_react6.default.createElement(Triangle, null) : null);
+  }));
+  let overall = details ? /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", { style: { width: 250, padding: "0.5em 0 0.5em 0.5em" } }, main), /* @__PURE__ */ import_react6.default.createElement("div", { style: { flex: 1, backgroundColor: "#444", color: "white", padding: "0.5em 0 0.5em 0.5em" } }, details)) : /* @__PURE__ */ import_react6.default.createElement(import_react6.default.Fragment, null, /* @__PURE__ */ import_react6.default.createElement("div", { style: { flex: 1, padding: "0.5em 0 0.5em 0.5em" } }, main));
+  return /* @__PURE__ */ import_react6.default.createElement("div", { style: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    height: "100%"
+  } }, overall);
+}
+
+// src/components/App.tsx
+function CostPlugin({ dataAvailability, costData }) {
+  let main;
+  switch (dataAvailability) {
+    case "NONE" /* None */:
+      main = /* @__PURE__ */ import_react7.default.createElement("h3", { style: { color: "#cdcdcd", textAlign: "center" } }, "No data yet");
+      break;
+    case "LOADING" /* Loading */:
+      main = /* @__PURE__ */ import_react7.default.createElement("h3", { style: { color: "#cdcdcd", textAlign: "center" } }, "Loading...");
+      break;
+    case "ERROR" /* Error */:
+      let errMsg = "Error loading cost data";
+      if (typeof costData === "object" && costData && costData.errors) {
+        const errs = Array.isArray(costData.errors) ? costData.errors : [costData.errors];
+        errMsg = /* @__PURE__ */ import_react7.default.createElement("ul", null, errs.map((e) => {
+          return /* @__PURE__ */ import_react7.default.createElement("li", null, e && e.message || "");
+        }));
+      }
+      main = /* @__PURE__ */ import_react7.default.createElement("h3", { style: { color: "#cdcdcd", textAlign: "center" } }, errMsg);
+      break;
+    case "AVAILABLE" /* Available */:
+      if (typeof costData === "object" && typeof costData.request === "object" && typeof costData.rateLimits === "object") {
+        main = /* @__PURE__ */ import_react7.default.createElement(CostAndRates, { characteristics: costData.request, rateLimits: costData.rateLimits });
+      } else if (typeof costData.request === "object") {
+        main = /* @__PURE__ */ import_react7.default.createElement(CostOnly, { characteristics: costData.request });
+      } else {
+        main = /* @__PURE__ */ import_react7.default.createElement("h3", { style: { color: "#cdcdcd", textAlign: "center" } }, "Error rendering cost data");
+      }
+      break;
+  }
+  return /* @__PURE__ */ import_react7.default.createElement("div", { className: "qcs_wrapper" }, main);
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  CostPlugin
+});
