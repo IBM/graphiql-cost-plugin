@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "test": "playwright test",
+    "test:open": "playwright test --ui --ui-host=localhost"
   },
   "keywords": [],
   "author": "Erik Wittern",
@@ -19,6 +21,7 @@
     "react-dom": "^16.14.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "parcel-bundler": "^1.12.4"
   }
 }
